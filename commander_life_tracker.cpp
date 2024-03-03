@@ -2,13 +2,13 @@
 #include "drivers/st7789/st7789.hpp"
 #include "libraries/pico_graphics/pico_graphics.hpp"
 #include "pico/stdlib.h"
-#include "libraries/pico_graphics/pico_graphics.hpp"
 #include "libraries/gfx_pack/gfx_pack.hpp"
 
 using namespace pimoroni;
 
-ST7789 st7789(PicoExplorer::WIDTH, PicoExplorer::HEIGHT, ROTATE_0, false, get_spi_pins(BG_SPI_FRONT));
-PicoGraphics_PenRGB332 graphics(st7789.width, st7789.height, nullptr);
+ST7567 st7567(128, 64, GfxPack::gfx_pack_pins);
+PicoGraphics_Pen1Bit graphics(st7567.width, st7567.height, nullptr);
+RGBLED backlight_rgb(GfxPack::BL_R, GfxPack::BL_G, GfxPack::BL_B, Polarity::ACTIVE_HIGH);
 Button button_d(GfxPack::D);
 Button button_e(GfxPack::E);
 Point text_location(0, 0);
@@ -19,20 +19,31 @@ std::string convert_life_to_string(int life) {
 }
 
 int main() {
-    graphics.set_pen(255, 0, 0);
-    int life = 40;
 
+    int life = 40;
     while(true) {
 
-        if(button_d.raw()) {
+        //check for only one press
+        //button.raw will update the state smoothly, which is not desired here
+        //button.read check for state before update
+        if(button_d.read()) {
             life -= 1;
         }
 
-        if(button_e.raw()) {
+        if(button_e.read()) {
            life += 1;
         }
 
+        //clean screen
+        //TODO: move those lines to distinct function as it will be called multiple times
+        graphics.set_pen(0);
+        graphics.clear();
+
+        //update screen
+        //TODO: wrap up in method
         graphics.set_pen(15);
         graphics.text(convert_life_to_string(life), text_location, 320);
+        st7567.update(&graphics);
+
     }
 }
