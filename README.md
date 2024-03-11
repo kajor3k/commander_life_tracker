@@ -1,83 +1,42 @@
-# Pico C++ Boilerplate Project <!-- omit in toc -->
+# Magic The Gathering life tracker
 
-This project is intended as a starting point for working with the Pico SDK and Pimoroni Libraries in C++.
+This project was created using [pico-boilerplate repository](https://github.com/pimoroni/pico-boilerplate).
 
-- [Before you start](#before-you-start)
-- [Preparing your build environment](#preparing-your-build-environment)
-- [Grab the Pimoroni libraries](#grab-the-pimoroni-libraries)
-- [Clone this boilerplate](#clone-this-boilerplate)
-- [Prepare Visual Studio Code](#prepare-visual-studio-code)
-- [Prepare your project](#prepare-your-project)
-- [Pick your LICENSE](#pick-your-license)
+- [General](#General)
+- [Components](#Components)
+- [How to use](#How-to-use)
+- [Instruction](#Instruction)
+- [Future plans](#Future-plans)
+- [Author](#Author)
 
-## Before you start
+## General
 
-It's easier if you make a `pico` directory or similar in which you keep the SDK, Pimoroni Libraries and your projects alongside each other. This makes it easier to include libraries.
+It's a simple life tracker to be used during MTG games. I was having a commander format in mind, but it may be used for other formats
 
-## Preparing your build environment
+## Components
 
-Install build requirements:
+It was tested on Raspberry Pico H with GFX LCD by Pimoroni. 
 
-```bash
-sudo apt update
-sudo apt install cmake gcc-arm-none-eabi build-essential
-```
 
-And the Pico SDK:
+## How to use
+All the releases are in _release_ directory. Feel free to drop it to your Pico :)
 
-```
-git clone https://github.com/raspberrypi/pico-sdk
-cd pico-sdk
-git submodule update --init
-export PICO_SDK_PATH=`pwd`
-cd ../
-```
+## Instruction
 
-The `PICO_SDK_PATH` set above will only last the duration of your session.
+A - show previous view
+B - show next view
+C - increase brightness (whenever max brightness is reached it is set up back to 0)
+D - decrease value by 1
+E - increase value by 1 (or by 2 if that's a commander tax)
 
-You should should ensure your `PICO_SDK_PATH` environment variable is set by `~/.profile`:
+## Future plans
+- add support for other formats (definitely Modern, maybe Draft - adding some info about won match in best of 3 would be nice).
+- add more visual effects while increasing or decreasing value (floating delta numbers. Quite convenient each time nasty opponent hits you for 17)
+- play with rgb backlight (that one is risky, as I'm not sure how rgb backlight works with a battery pack. According to pimoroni docs, not so well, so I may be constrained by technology in that one. We'll see)
+- prepare a tutorial about my rig to make it as easy as possible for you to assemble it on your own 
 
-```
-export PICO_SDK_PATH="/path/to/pico-sdk"
-```
+## Author
+You can catch me via [kajor3k@gmail.com](mailto:kajor3k@gmail.com?subject=commander_life_tracker). Feel free to drop a feedback or ideas for improvements
 
-## Grab the Pimoroni libraries
-
-```
-git clone https://github.com/pimoroni/pimoroni-pico
-```
-
-## Clone this boilerplate
-
-```
-git clone https://github.com/pimoroni/pico-boilerplate
-cd pico-boilerplate
-```
-
-If you have not or don't want to set `PICO_SDK_PATH` you can edit `.vscode/settings.json` to pass the path directly to CMake.
-
-## Prepare Visual Studio Code
-
-Open VS Code and hit `Ctrl+Shift+P`.
-
-Type `Install` and select `Extensions: Install Extensions`.
-
-Make sure you install:
-
-1. C/C++
-2. CMake
-3. CMake Tools
-4. Cortex-Debug (optional: for debugging via a Picoprobe or Pi GPIO)
-5. Markdown All in One (recommended: for preparing your own README.md)
-
-## Prepare your project
-
-Edit `CMakeLists.txt` and follow the instructions, you should make sure you:
-
-1. edit your project name
-2. include the libraries you need
-2. link the libraries to your project
-
-## Pick your LICENSE
-
-We've included a copy of BSD 3-Clause License to match that used in Raspberry Pi's Pico SDK and Pico Examples. You should review this and check it's appropriate for your project before publishing your code.
+## Buy me a coffee 
+- if you like this projectm  you may consider [buying me a coffee](https://www.buymeacoffee.com/kajor3k). Much appreciated, definitely not necessary. 
