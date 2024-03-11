@@ -36,7 +36,7 @@ std::string experience_counter_label = "Experience Counter";
 std::string the_ring_counter_label = "The Ring Counter";
 std::string storm_counter_label = "Storm Counter";
 
-std::vector<std::tuple<std::string, int>> get_counter_labels_vector() {
+std::vector<std::tuple<std::string, int>> get_state_vector() {
     std::vector<std::tuple<std::string, int>> counter_labels_vector;
     std::unordered_map<std::string, int> counters_labels_map;
     counter_labels_vector.emplace_back(std::pair<std::string, int>(life_label, 40));
@@ -57,7 +57,7 @@ std::vector<std::tuple<std::string, int>> get_counter_labels_vector() {
     return counter_labels_vector;
 }
 
-std::vector<std::tuple<std::string, int>> counter_labels_vector = get_counter_labels_vector();
+std::vector<std::tuple<std::string, int>> counter_labels_vector = get_state_vector();
 int current_counter = 40;
 std::string current_label = life_label;
 int current_brightness = 0;
